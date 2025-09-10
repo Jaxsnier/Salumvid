@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>SALUMVID</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -15,58 +15,97 @@
 <template id="home-template">
 
     <body>
-        <header>
-            SALUMVID - Cálculo de Materiales
-        </header>
-        <main>
-            <h2>Lista de Ventanas</h2>
-            <button onclick="agregarFila()">+ Añadir Ventana</button>
-            <div class="table-container">
-                <table id="tablaVentanas">
-                    <thead>
-                        <tr>
-                            <th rowspan="2">No</th>
-                            <th rowspan="2">Cant</th>
-                            <th rowspan="2">Ancho</th>
-                            <th rowspan="2">Alto</th>
-                            <th rowspan="2">Hojas</th>
-                            <th colspan="2">Perfiles del Marco</th>
-                            <th colspan="4">Perfiles de la Hoja</th>
-                            <th colspan="3">Goma</th>
-                            <th rowspan="2">Jambas en Pulgadas</th>
-                        </tr>
-                        <tr>
-                            <th>Laterales</th>
-                            <th>Cab/Riel</th>
-                            <th>Cab/Alf</th>
-                            <th>Jambas</th>
-                            <th>Medida</th>
-                            <th>Cant</th>
-                            <th>Bronce</th>
-                            <th>Ancho</th>
-                            <th>Alto</th>
-                            <th>Pie</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>2</td>
-                            <td>0.680</td>
-                            <td>0.565</td>
-                            <td>2</td>
-                            <td>0.552</td>
-                            <td>0.675</td>
-                            <td>0.334</td>
-                            <td>0.543</td>
-                            <td>11.30</td>
-                            <td>18.15</td>
-                            <td>9.82</td>
-                            <td>22.25</td>
-                        </tr>
-                    </tbody>
-                </table>
+        <header class="site-header" role="banner">
+            <div class="header-container">
+
+                <!-- IZQUIERDA: botón hamburguesa + dropdown -->
+                <div class="header-left">
+                    <!-- checkbox para controlar el dropdown (CSS-only) -->
+                    <input id="menu-toggle" type="checkbox" aria-hidden="true" />
+
+                    <!-- etiqueta que actúa como botón hamburguesa -->
+                    <label for="menu-toggle" class="hamburger" role="button" aria-label="Abrir menú">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </label>
+
+                    <!-- menú desplegable (aparece cuando #menu-toggle está checked) -->
+                    <nav id="main-menu" class="dropdown" aria-label="Menú principal">
+                        <ul>
+                            <li><a href="#">Inicio</a></li>
+                            <li><a href="#">Proyectos</a></li>
+                            <li><a href="#">Servicios</a></li>
+                            <li><a href="#">Materiales</a></li>
+                            <li><a href="#">Contacto</a></li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <!-- CENTRO: logo / marca -->
+                <div class="header-center">
+                    <a href="#" class="brand">SALUMVID <span class="sr">S.R.L.</span></a>
+                </div>
+
+                <!-- DERECHA: acción rápida -->
+                <div class="header-right">
+                    <a class="cta" href="#">Cotizar</a>
+                </div>
+
             </div>
+        </header>
+        <main class="page-content">
+            <section style="padding:2rem;">
+                <h1 class="page-title">Cálculo de materiales</h1>
+                <h2>Lista de Ventanas</h2>
+                <button onclick="agregarFila()">+ Añadir Ventana</button>
+                <div class="table-container">
+                    <table id="tablaVentanas">
+                        <thead>
+                            <tr>
+                                <th rowspan="2">No</th>
+                                <th rowspan="2">Cant</th>
+                                <th rowspan="2">Ancho</th>
+                                <th rowspan="2">Alto</th>
+                                <th rowspan="2">Hojas</th>
+                                <th colspan="2">Perfiles del Marco</th>
+                                <th colspan="4">Perfiles de la Hoja</th>
+                                <th colspan="3">Goma</th>
+                                <th rowspan="2">Jambas en Pulgadas</th>
+                            </tr>
+                            <tr>
+                                <th>Laterales</th>
+                                <th>Cab/Riel</th>
+                                <th>Cab/Alf</th>
+                                <th>Jambas</th>
+                                <th>Medida</th>
+                                <th>Cant</th>
+                                <th>Bronce</th>
+                                <th>Ancho</th>
+                                <th>Alto</th>
+                                <th>Pie</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>2</td>
+                                <td>0.680</td>
+                                <td>0.565</td>
+                                <td>2</td>
+                                <td>0.552</td>
+                                <td>0.675</td>
+                                <td>0.334</td>
+                                <td>0.543</td>
+                                <td>11.30</td>
+                                <td>18.15</td>
+                                <td>9.82</td>
+                                <td>22.25</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
         </main>
 
         <script src="script.js"></script>

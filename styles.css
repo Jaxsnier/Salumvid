@@ -237,3 +237,229 @@ tbody tr:hover {
     min-width: 700px; /* Ajusta ancho mínimo para móviles */
   }
 }
+
+/* Header minimalista, fijo y "flotante" (blur + sombra) */
+
+/* ===== variables y reset ligero ===== */
+:root{
+  --header-height: 64px;
+  --brand-color: #8c2d2d;
+  --muted: #666;
+  --glass-bg: rgba(255,255,255,0.70);
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color:#222;
+  background:#f6f6f6;
+}
+
+/* ===== HEADER (fijo) ===== */
+.site-header{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+
+  /* aspecto "flotante" */
+  background: var(--glass-bg);
+  backdrop-filter: blur(6px) saturate(110%);
+  -webkit-backdrop-filter: blur(6px) saturate(110%);
+  box-shadow: 0 8px 30px rgba(20,20,20,0.12);
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+}
+
+/* contenedor para alinear contenido y limitar ancho */
+.header-container{
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+/* espacios izquierdo-centro-derecha */
+.header-left,
+.header-center,
+.header-right{
+  display:flex;
+  align-items:center;
+}
+
+/* ================= HAMBURGUESA + MENÚ ================= */
+#menu-toggle{
+  /* checkbox oculto */
+  position:absolute;
+  opacity:0;
+  pointer-events:none;
+  width:0;
+  height:0;
+}
+
+/* etiqueta que se ve como botón */
+.hamburger{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding: .45rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background .18s ease;
+  user-select: none;
+}
+
+/* ampliar área táctil (útil en móviles) */
+.hamburger { touch-action: manipulation; }
+
+/* 3 barras */
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px; /* 🔑 espaciado uniforme entre líneas */
+  cursor: pointer;
+}
+
+.hamburger span {
+  width: 24px;
+  height: 2px;
+  background: #222;
+  border-radius: 2px;
+  transition: transform 0.25s ease, opacity 0.2s ease;
+}
+
+/* cuando el checkbox está checked animamos la hamburguesa */
+#menu-toggle:checked + .hamburger span:nth-child(1){
+  transform: translateY(7px) rotate(45deg);
+}
+#menu-toggle:checked + .hamburger span:nth-child(2){
+  opacity: 0;
+}
+#menu-toggle:checked + .hamburger span:nth-child(3){
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* DROPDOWN (invisible por defecto) */
+.dropdown{
+  position: absolute;
+  left: 0;
+  top: calc(var(--header-height) + 8px);
+  min-width: 220px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 12px 30px rgba(10,10,10,0.10);
+  padding: .45rem;
+  transform-origin: top left;
+  transform: translateY(-6px) scale(.98);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .18s ease, transform .18s ease, visibility .18s;
+  z-index: 1000;
+  border: 1px solid rgba(0,0,0,0.03);
+}
+
+/* mostrar cuando el checkbox esté checked */
+#menu-toggle:checked ~ .dropdown{
+  transform: translateY(0) scale(1);
+  opacity: 1;
+  visibility: visible;
+}
+
+/* lista del menú */
+.dropdown ul{
+  list-style: none;
+  margin:0;
+  padding:0;
+}
+.dropdown li + li{ margin-top: .25rem; }
+
+.dropdown a{
+  display:block;
+  padding: .55rem .6rem;
+  font-size: .95rem;
+  color: #222;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background .14s ease, color .14s ease;
+}
+.dropdown a:hover{
+  background: #f3f3f3;
+}
+
+/* ================= MARCA / CENTER ================= */
+.brand{
+  text-decoration: none;
+  color: var(--brand-color);
+  font-weight: 700;
+  letter-spacing: .6px;
+  font-size: 1.05rem;
+  display:inline-block;
+  padding: .25rem .5rem;
+  border-radius: 8px;
+}
+
+/* esconder texto adicional si no interesa en pantallas pequeñas */
+.sr{ font-weight:400; font-size:.9rem; color: var(--muted) }
+
+/* ================= BOTÓN DERECHO ================= */
+.cta{
+  display:inline-block;
+  padding: .45rem .75rem;
+  background: transparent;
+  color: var(--brand-color);
+  border-radius: 8px;
+  border: 1px solid rgba(140,45,45,0.12);
+  text-decoration:none;
+  font-weight:600;
+  font-size:.9rem;
+  transition: background .14s, color .14s, transform .12s;
+}
+.cta:hover{
+  background: rgba(140,45,45,0.06);
+  transform: translateY(-1px);
+}
+
+/* ================= EVITAR QUE EL HEADER TAPE EL CONTENIDO ================= */
+.page-content{
+  /* siempre dejar espacio superior = alto del header + 12px */
+  padding-top: calc(var(--header-height) + 12px);
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 800px){
+  :root{ --header-height: 60px; }
+
+  .brand{ font-size: 1rem; }
+  .dropdown{ left: .5rem; min-width: 72vw; } /* menú más ancho en móviles */
+}
+
+@media (max-width: 480px){
+  :root{ --header-height: 56px; }
+  .header-container{ padding: 0 .6rem; }
+
+  .hamburger span{ width: 18px; }
+  .dropdown{ left: .4rem; min-width: 86vw; top: calc(var(--header-height) + 6px); }
+
+  .cta{ display:none } /* simplificar en pantallas pequeñas */
+}
+.page-content {
+  padding: 80px 20px 20px; /* deja espacio debajo del header fijo */
+  text-align: center;
+}
+
+.page-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #222;
+  margin: 0;
+}
