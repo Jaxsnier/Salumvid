@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div id="app"></div>
+</body>
+<template id="home-template">
+    <div class="home-main" id="home-container">
+        <h1>Welcome to the Home Page</h1>
+        <button id="btnMe">Me Informacion</button>
+    </div>
+</template>
+
+<template id="login-template">
+    <div class="form-main" id="login-container">
+        <p class="form-title">Login</p>
+        <form id="login-form" method="post">
+            <label for="username">Username:</label>
+            <input placeholder="Nombte de usuario" type="text" id="username" name="username" required>
+            <br>
+            <label for="password">Password:</label>
+            <input placeholder="Contraseña" type="password" id="password" name="password" required>
+            <br>
+            <button type="submit" value="Enviar">Enviar</button>
+        </form>
+    </div>
+</template>
+<script src="main.js"></script>
+
+</html>
