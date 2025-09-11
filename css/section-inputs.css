@@ -1,0 +1,88 @@
+/*css del main del html que se encuentra en el tamplate "home-template"*/
+
+/* Sección: Lista de Ventanas (estilo minimalista) */
+.section-inputs {
+  max-width: 980px;
+  margin: 0 auto 1.5rem;
+  padding: 18px;
+  background: rgba(255,255,255,0.75);
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(16,24,40,0.04);
+  border: 1px solid rgba(15,23,42,0.04);
+}
+
+/* Título */
+.section-inputs > h2 {
+  margin: 0 0 12px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+/* Formulario de ventana: grid compacto y responsivo */
+.ventana-form {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(120px, 1fr));
+  gap: 10px;
+  align-items: end;
+}
+
+/* Cada etiqueta pequeña sobre su input */
+.ventana-form label {
+  grid-column: span 1;
+  font-size: 0.82rem;
+  color: #6b7280;
+  margin-bottom: 4px;
+}
+
+/* Inputs ocupan la misma columna que su label (stacked) */
+.ventana-form input {
+  grid-column: span 1;
+  width: 100%;
+  padding: 9px 10px;
+  border-radius: 8px;
+  border: 1px solid #e6e9ee;
+  background: #fff;
+  font-size: 0.95rem;
+  outline: none;
+  transition: box-shadow .15s ease, border-color .15s ease;
+}
+
+/* Focus accesible */
+.ventana-form input:focus {
+  border-color: rgba(37,99,235,0.35);
+  box-shadow: 0 6px 16px rgba(37,99,235,0.06);
+}
+
+/* Botón principal */
+.ventana-form button#btnAgregarVentana {
+  grid-column: 4 / 5;
+  padding: 10px 12px;
+  background: var(--accent, #2563eb);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: transform .12s ease, box-shadow .12s ease, opacity .12s ease;
+}
+
+/* Hover/active */
+.ventana-form button#btnAgregarVentana:hover { transform: translateY(-2px); }
+.ventana-form button#btnAgregarVentana:active { transform: translateY(0); }
+
+/* En pantallas pequeñas: inputs apilan y botón ocupa toda la fila */
+@media (max-width: 720px) {
+  .ventana-form { grid-template-columns: repeat(2, minmax(140px, 1fr)); gap: 8px; }
+  .ventana-form label, .ventana-form input { grid-column: auto; }
+  .ventana-form button#btnAgregarVentana { grid-column: 1 / -1; width: 100%; }
+}
+
+/* En móviles muy pequeños, una columna */
+@media (max-width: 420px) {
+  .ventana-form { grid-template-columns: 1fr; }
+  .ventana-form label { margin-top: 6px; }
+}
+
+/* Pequeño ajuste visual para mantener consistencia con tablas */
+.table-block { margin-top: 12px; }

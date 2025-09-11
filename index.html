@@ -8,6 +8,8 @@
     <title>SALUMVID</title>
     <link rel="stylesheet" href="css/login.css">
     <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/section-inputs.css">
+    <link rel="stylesheet" href="css/section-tables.css">
 
 </head>
 
@@ -57,60 +59,58 @@
             </div>
         </header>
         <main class="page-content">
-            <section style="padding:2rem;">
-                <h1 class="page-title">Cálculo de materiales</h1>
-                <h2>Lista de Ventanas</h2>
-                <button onclick="agregarFila()">+ Añadir Ventana</button>
-                <div class="table-container">
-                    <table id="tablaVentanas">
-                        <thead>
-                            <tr>
-                                <th rowspan="2">No</th>
-                                <th rowspan="2">Cant</th>
-                                <th rowspan="2">Ancho</th>
-                                <th rowspan="2">Alto</th>
-                                <th rowspan="2">Hojas</th>
-                                <th colspan="2">Perfiles del Marco</th>
-                                <th colspan="4">Perfiles de la Hoja</th>
-                                <th colspan="3">Goma</th>
-                                <th rowspan="2">Jambas en Pulgadas</th>
-                            </tr>
-                            <tr>
-                                <th>Laterales</th>
-                                <th>Cab/Riel</th>
-                                <th>Cab/Alf</th>
-                                <th>Jambas</th>
-                                <th>Medida</th>
-                                <th>Cant</th>
-                                <th>Bronce</th>
-                                <th>Ancho</th>
-                                <th>Alto</th>
-                                <th>Pie</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>2</td>
-                                <td>0.680</td>
-                                <td>0.565</td>
-                                <td>2</td>
-                                <td>0.552</td>
-                                <td>0.675</td>
-                                <td>0.334</td>
-                                <td>0.543</td>
-                                <td>11.30</td>
-                                <td>18.15</td>
-                                <td>9.82</td>
-                                <td>22.25</td>
-                            </tr>
-                        </tbody>
-                    </table>
+            <section class="section">
+                <div class="section-header">
+                    <h1 class="page-title">Cálculo de materiales</h1>
                 </div>
+                <section class="section-inputs">
+                    <h2>Lista de Ventanas</h2>
+
+                    <div class="ventana-form" id="ventana-form" aria-label="Formulario agregar ventana">
+                        <label for="ventana-ancho">Ancho (mm)</label>
+                        <input id="ventana-ancho" name="ancho" type="number" placeholder="Ancho" required>
+
+                        <label for="ventana-alto">Alto (mm)</label>
+                        <input id="ventana-alto" name="alto" type="number" placeholder="Alto" required>
+
+                        <label for="ventana-cantidad">Cantidad</label>
+                        <input id="ventana-cantidad" name="cantidad" type="number" min="1" placeholder="Cantidad"
+                            required>
+
+                        <button id="btnAgregarVentana" type="button">Agregar Ventana</button>
+                    </div>
+                </section>
+                <section class="section-tables">
+                    <!-- Tablas para almacenar la estructura de datos -->
+                    <div class="tables" aria-live="polite">
+
+                        <!-- Medidas de hueco -->
+                        <section class="table-block" id="hueco-block">
+                            <table class="data-table" id="hueco-table" aria-describedby="hueco-desc">
+                                <caption id="hueco-desc">Listado de huecos añadidos</caption>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Ancho (mm)</th>
+                                        <th scope="col">Alto (mm)</th>
+                                        <th scope="col">Cantidad</th>
+                                        <th scope="col">Acciones</th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="colgroup" colspan="4">Huecos añadidos</th>
+                                    </tr>
+                                <tbody id="hueco-tbody">
+                                    <!-- filas añadidas dinámicamente -->
+                                </tbody>
+                            </table>
+                        </section>
+
+                       
+                    </div>
+                </section>
+
             </section>
         </main>
 
-        <script src="script.js"></script>
     </body>
 
 </template>
