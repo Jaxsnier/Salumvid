@@ -1,239 +1,62 @@
-/* Estilos minimalistas para .section-tables y sus tablas */
+/* Módulo contenedor independiente para las tablas:
+   tiene sus propias barras de scroll y no provoca scroll global */
 .section-tables {
-  max-width: 980px;
-  margin: 0 auto 2rem;
-  padding: 18px;
-  background: rgba(255,255,255,0.80);
-  border-radius: 10px;
-  box-shadow: 0 6px 18px rgba(16,24,40,0.04);
+  box-sizing: border-box;   /* incluye padding/border en el tamaño */
+  width: 100%;              /* se ajusta al ancho del padre */
+  max-width: 100%;
+  height: 100%;             /* ocupa la altura disponible del padre */
+  max-height: 100%;
+
+  margin: 0;                /* controla el espaciado desde el padre */
+  padding: 12px;
+  background: rgba(255,255,255,0.90);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(16,24,40,0.04);
   border: 1px solid rgba(15,23,42,0.04);
+
+  overflow: hidden;         /* oculta todo lo que salga de su caja */
+  position: relative;       /* referencia para elementos internos posicionados */
 }
 
-/* Contenedor que agrupa bloques de tablas */
+/* Si el padre usa flex, permitir que .section-tables crezca/encoga */
+.section-tables.flex-fill { flex: 1 1 auto; }
+
+/* Contenedor interno con scroll independiente */
 .tables {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
+  /* limita la altura visible del módulo y activa scroll interno */
+  max-height: 56vh;              /* ajusta según necesites */
+  min-height: 180px;
+  overflow: auto;                /* muestra scrollbars cuando el contenido excede */
+  -webkit-overflow-scrolling: touch; /* suaviza el scroll en móviles */
+  padding-right: 6px;            /* evita que el contenido toque la barra */
 }
 
-/* Cada bloque (secciones internas) */
-.table-block {
-  background: transparent;
-  padding: 8px 6px;
-  border-radius: 8px;
-}
-
-/* Bloque título */
-.table-block > h3 {
-  margin: 0 0 10px;
-  font-size: 1rem;
-  font-weight: 700;
-  color: #0f172a;
-}
-
-/* Subtítulos internos (h4) */
-.table-block h4 {
-  margin: 12px 0 8px;
-  font-size: .95rem;
-  font-weight: 600;
-  color: #374151;
-}
-
-/* Tablas base */
+/* Forzar que la tabla pueda desbordar horizontalmente dentro de .tables */
 .data-table {
   width: 100%;
+  /* evita que la tabla fuerce el ancho de la página:
+     se deja que el contenedor .tables gestione el overflow */
+  table-layout: fixed;
   border-collapse: collapse;
-  background: #fff;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 8px rgba(2,6,23,0.04);
+  min-width: 0;           /* permite encoger dentro del scroller */
+
+  white-space: normal;    /* permite que el contenido haga wrap */
+  word-break: break-word; /* evitar que una celda larga obligue el ancho */
 }
 
-/* caption (pequeña descripción) */
-.data-table caption {
-  text-align: left;
-  padding: 8px 12px;
-  font-size: .85rem;
-  color: #6b7280;
-}
-
-/* Encabezado */
-.data-table thead {
+/* cabezera sticky para mejor usabilidad dentro del scroller */
+.tables thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
   background: #f8fafc;
 }
-.data-table th,
-.data-table td {
-  padding: 10px 12px;
-  text-align: left;
-  font-size: .92rem;
-  border-bottom: 1px solid #eef2f6;
-  color: #0f172a;
-}
-.data-table th {
-  font-weight: 700;
-  color: #111827;
+
+/* responsive overrides */
+@media (max-width: 720px) {
+  .data-table { min-width: 200%; }
 }
 
-/* Acciones (botones en la columna acciones) */
-.table-action {
-  display: inline-flex;
-  gap: 6px;
-  align-items: center;
+@media (max-width: 420px) {
+  .data-table { min-width: 350%; }
 }
-.table-action button {
-  padding: 6px 8px;
-  border-radius: 6px;
-  border: 1px solid rgba(15,23,42,0.06);
-  background: #fff;
-  cursor: pointer;
-  font-size: .85rem;
-}
-.table-action button.primary {
-  background: var(--accent, #2563eb);
-  color: #fff;
-  border-color: rgba(37,99,235,0.15);
-}
-
-/* Fila vacía / placeholder */
-.table-empty {
-  text-align: center;
-  padding: 14px;
-  color: #6b7280;
-  font-size: .95rem;
-}
-
-/* Responsive: organizar bloques en dos columnas en pantallas anchas */
-@media (min-width: 960px) {
-  .tables {
-    grid-template-columns: 1fr 1fr;
-    align-items: start;
-  }
-  /* permitir que tablas amplias (ej. hueco) ocupen toda la fila */
-  #hueco-block { grid-column: 1 / -1; }
-}
-
-/* Ajustes móviles */
-@media (max-width: 640px) {
-  .data-table th, .data-table td { padding: 8px 10px; font-size: .88rem; }
-  .table-block h4 { font-size: .92rem; }
-  .table-action button { padding: 6px; font-size: .82rem; }
-}
-/* Estilos minimalistas para .section-tables y sus tablas */
-.section-tables {
-  max-width: 980px;
-  margin: 0 auto 2rem;
-  padding: 18px;
-  background: rgba(255,255,255,0.80);
-  border-radius: 10px;
-  box-shadow: 0 6px 18px rgba(16,24,40,0.04);
-  border: 1px solid rgba(15,23,42,0.04);
-}
-
-/* Contenedor que agrupa bloques de tablas */
-.tables {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
-}
-
-/* Cada bloque (secciones internas) */
-.table-block {
-  background: transparent;
-  padding: 8px 6px;
-  border-radius: 8px;
-}
-
-/* Bloque título */
-.table-block > h3 {
-  margin: 0 0 10px;
-  font-size: 1rem;
-  font-weight: 700;
-  color: #0f172a;
-}
-
-/* Subtítulos internos (h4) */
-.table-block h4 {
-  margin: 12px 0 8px;
-  font-size: .95rem;
-  font-weight: 600;
-  color: #374151;
-}
-
-/* Tablas base */
-.data-table {
-  width: 100%;
-  border-collapse: collapse;
-  background: #fff;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 8px rgba(2,6,23,0.04);
-}
-
-/* caption (pequeña descripción) */
-.data-table caption {
-  text-align: left;
-  padding: 8px 12px;
-  font-size: .85rem;
-  color: #6b7280;
-}
-
-/* Encabezado */
-.data-table thead {
-  background: #f8fafc;
-}
-.data-table th,
-.data-table td {
-  padding: 10px 12px;
-  text-align: left;
-  font-size: .92rem;
-  border-bottom: 1px solid #eef2f6;
-  color: #0f172a;
-}
-.data-table th {
-  font-weight: 700;
-  color: #111827;
-}
-
-/* Acciones (botones en la columna acciones) */
-.table-action {
-  display: inline-flex;
-  gap: 6px;
-  align-items: center;
-}
-.table-action button {
-  padding: 6px 8px;
-  border-radius: 6px;
-  border: 1px solid rgba(15,23,42,0.06);
-  background: #fff;
-  cursor: pointer;
-  font-size: .85rem;
-}
-.table-action button.primary {
-  background: var(--accent, #2563eb);
-  color: #fff;
-  border-color: rgba(37,99,235,0.15);
-}
-
-/* Fila vacía / placeholder */
-.table-empty {
-  text-align: center;
-  padding: 14px;
-  color: #6b7280;
-  font-size: .95rem;
-}
-
-/* Responsive: organizar bloques en dos columnas en pantallas anchas */
-@media (min-width: 960px) {
-  .tables {
-    grid-template-columns: 1fr 1fr;
-    align-items: start;
-  }
-  /* permitir que tablas amplias (ej. hueco) ocupen toda la fila */
-  #hueco-block { grid-column: 1 / -1; }
-}
-
-/* Ajustes móviles */
-@media (max-width: 640px) {
-  .data-table th, .data-table td { padding: 8px 10px; font-size: .88rem; }
-  .table-block h4 { font-size: .92rem; }
-  .table-action button { padding: 6px; font-size: .82rem; }}

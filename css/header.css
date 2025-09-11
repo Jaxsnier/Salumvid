@@ -47,7 +47,14 @@ header {
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
+
+  flex-wrap: nowrap; /* evitar que los items del header salten a otra linea */
 }
+
+/* asegurar comportamiento de las regiones (opcional, ayuda al alineado) */
+.header-left  { flex: 0 0 auto; }
+.header-center{ flex: 1 1 auto; text-align: center; }
+.header-right { flex: 0 0 auto; }
 
 /* espacios izquierdo-centro-derecha */
 .header-left,
