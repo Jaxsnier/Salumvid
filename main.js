@@ -14,21 +14,9 @@ const renderApp = () => {
 const renderHome = () => {
     const homeTemplate = document.getElementById('home-template');
     document.getElementById('app').innerHTML = homeTemplate.innerHTML;
-
-    const btnMe = document.getElementById('btnMe'); // Botón "Me Informacion"
-    btnMe.addEventListener('click', () => {
-        return fetch(urlme, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: token,
-            }
-        }).then(response => response.json()).then(User => {
-            alert(`User Info:\nName: ${User.username}\nOtros datos: ${JSON.stringify(User)}`);
-        }).catch(error => {
-            alert('Failed to fetch user information.' + token);
-        });   
-    });
+    
+    const btnAgregarVentana = document.getElementById('btnAgregarVentana'); // Botón "Me Informacion"
+    btnAgregarVentana.addEventListener('click', AgregarVentana);
 }
 const renderLogin = () => {
     const loginTemplate = document.getElementById('login-template');
@@ -57,6 +45,22 @@ const renderLogin = () => {
             })
 
     })
+}
+const AgregarVentana = () => {
+    alert('Funcionalidad en desarrollo.');
+}
+const InfoMe = () => {
+    return fetch(urlme, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: token,
+            }
+        }).then(response => response.json()).then(User => {
+            alert(`User Info:\nName: ${User.username}\nOtros datos: ${JSON.stringify(User)}`);
+        }).catch(error => {
+            alert('Failed to fetch user information.' + token);
+        });   
 }
 
 window.onload = () => {

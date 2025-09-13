@@ -26,7 +26,7 @@
   /* limita la altura visible del módulo y activa scroll interno */
   max-height: 56vh;              /* ajusta según necesites */
   min-height: 180px;
-  overflow: auto;                /* muestra scrollbars cuando el contenido excede */
+  overflow: scroll;                /* muestra scrollbars cuando el contenido excede */
   -webkit-overflow-scrolling: touch; /* suaviza el scroll en móviles */
   padding-right: 6px;            /* evita que el contenido toque la barra */
 }
@@ -39,7 +39,7 @@
   table-layout: fixed;
   border-collapse: collapse;
   min-width: 0;           /* permite encoger dentro del scroller */
-
+  max-width: 1100px;
   white-space: normal;    /* permite que el contenido haga wrap */
   word-break: break-word; /* evitar que una celda larga obligue el ancho */
 }
