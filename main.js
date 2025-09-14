@@ -53,7 +53,9 @@ const AgregarVentana = () => {
     var medidas = [                                 //falta comprobar que no faltan datos
         document.getElementById("ventana-cantidad").value,
         document.getElementById("ventana-ancho").value,
-        document.getElementById("ventana-alto").value,]
+        document.getElementById("ventana-alto").value,
+        document.getElementById("ventana-hojas").value,
+    ]
 
     ventanas.push({
         // Medidas
@@ -61,7 +63,7 @@ const AgregarVentana = () => {
         cantidad: medidas[0],
         ancho: medidas[1],
         alto: medidas[2],
-        hojas: -1,
+        hojas: medidas[3],
         //Perfiles Marco
         Cant: -1,
         Medida: -1,
