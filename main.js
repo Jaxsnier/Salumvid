@@ -12,13 +12,15 @@ const renderApp = () => {
     }
     renderLogin();
 }
-
 const renderHome = () => {
     const homeTemplate = document.getElementById('home-template');
     document.getElementById('app').innerHTML = homeTemplate.innerHTML;
 
-    const btnAgregarVentana = document.getElementById('btnAgregarVentana'); // Botón "Me Informacion"
+    const btnAgregarVentana = document.getElementById('btnAgregarVentana'); // Botón "Agregar Ventana"
     btnAgregarVentana.addEventListener('click', AgregarVentana);
+
+    const btnEliminarPorId = document.getElementById("btnEliminarPorId");
+    btnEliminarPorId.addEventListener("click", EliminarVentana);
 }
 const renderLogin = () => {
     const loginTemplate = document.getElementById('login-template');
@@ -50,7 +52,7 @@ const renderLogin = () => {
 }
 const AgregarVentana = () => {
 
-    var medidas = [                                 //falta comprobar que no faltan datos
+    var medidas = [                           //falta comprobar que no faltan datos
         document.getElementById("ventana-cantidad").value,
         document.getElementById("ventana-ancho").value,
         document.getElementById("ventana-alto").value,
@@ -82,10 +84,50 @@ const AgregarVentana = () => {
         Pie: -1,
 
     });
-    
+
+    //reseteando valores de los inputs
+    document.getElementById("ventana-ancho").value = "";
+    document.getElementById("ventana-alto").value = "";
+
     //console.log(ventanas)
-    
-    RenderVentana(ventanas[ventanas.length-1]);  //renderizamos todas las ventanas //luego implementar renderizar solo la ultima
+
+    RenderVentana(ventanas[ventanas.length - 1]);  //renderizamos todas las ventanas //luego implementar renderizar solo la ultima
+}
+const EliminarVentana = () => {
+    const raw = document.getElementById('delete-id-input')?.value;
+    const id = parseInt(String(raw ?? '').trim(), 10);
+
+    if (isNaN(id) || id < 1) {
+        alert('ID inválido');
+        return;
+    }
+
+    const idx = ventanas.findIndex(v => Number(v.id) === id);
+    if (idx === -1) {
+        alert(`No se encontró ventana con ID ${id}`);
+        return;
+    }
+
+     // eliminar del arreglo
+    ventanas.splice(idx, 1);
+
+    // reindexar ids consecutivos empezando en 1
+    ventanas.forEach((v, i) => { v.id = i + 1; });
+
+    // re-renderizar tbody
+    const tbody = document.getElementById('contenido-tabla');
+    if (tbody) {
+        tbody.innerHTML = '';
+        ventanas.forEach(v => RenderVentana(v));
+    }
+
+    // limpiar input
+    const input = document.getElementById('delete-id-input');
+    if (input) input.value = '';
+
+    console.log('Ventana eliminada. Estado actual:', ventanas);
+
+
 }
 const InfoMe = () => {
     return fetch(urlme, {
@@ -101,11 +143,10 @@ const InfoMe = () => {
     });
 }
 
-const RenderVentana = (ventana) =>
-    {
-        tbody = document.getElementById("contenido-tabla"); //buscamos contenido actual de la tabla
+const RenderVentana = (ventana) => {
+    tbody = document.getElementById("contenido-tabla"); //buscamos contenido actual de la tabla
 
-        const row = `
+    const row = `
             <tr>
                 <td>${ventana.id}</td>
                 <td>${ventana.cantidad ?? ''}</td>
@@ -130,8 +171,8 @@ const RenderVentana = (ventana) =>
                 <td>${ventana.Pie ?? ''}</td>
             </tr>
         `;
-        tbody.insertAdjacentHTML('beforeend', row);
-    }
+    tbody.insertAdjacentHTML('beforeend', row);
+}
 
 window.onload = () => {
     renderApp();

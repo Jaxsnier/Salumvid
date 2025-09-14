@@ -51,14 +51,70 @@
   z-index: 2;
   background: #f8fafc;
 }
+/* controles en esquina superior derecha del módulo de tablas -------------------------------------------------------*/
+.table-controls{
+    position: static;
+    margin-bottom: 8px;
+    justify-content: flex-end;
+    background: transparent;
+    box-shadow: none;
+    border: none;
+    padding: 0;
 
-/* responsive overrides */
+  top: 12px;
+  right: 12px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  z-index: 10;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(16,24,40,0.04);
+}
+
+/* input pequeño */
+.table-controls input{
+  width: 92px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: 1px solid #e6e9ee;
+  font-size: .9rem;
+  outline: none;
+}
+.table-controls input:focus{
+  box-shadow: 0 6px 16px rgba(37,99,235,0.06);
+  border-color: rgba(37,99,235,0.35);
+}
+
+/* botón eliminar */
+.table-controls button{
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: none;
+  background: #ef4444; /* rojo suave para acción de eliminar */
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+.table-controls button:hover{ transform: translateY(-2px); }
+.table-controls button:active{ transform: translateY(0); }
+/* responsive overrides ------------------------------------------------------------------------------*/
 @media (max-width: 1100px) {
   .data-table { min-width: 150%; }
 }
 
 @media (max-width: 720px) {
   .data-table { min-width: 200%; }
+
+  .table-controls{
+    position: static;
+    margin-bottom: 8px;
+    justify-content: flex-end;
+    background: transparent;
+    box-shadow: none;
+    border: none;
+    padding: 0;
+  }
+  .table-controls input{ width: 120px; }
 }
 
 @media (max-width: 420px) {

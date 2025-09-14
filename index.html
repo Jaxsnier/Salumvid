@@ -73,18 +73,24 @@
                         <label for="ventana-alto">Alto (mm)</label>
                         <input id="ventana-alto" name="alto" type="number" placeholder="Alto" required>
 
-                        <label for="ventana-cantidad" >Cantidad</label>
+                        <label for="ventana-cantidad">Cantidad</label>
                         <input id="ventana-cantidad" name="cantidad" type="number" min="1" placeholder="Cantidad"
                             required>
 
-                        <label for="ventana-hojas" >Hojas</label>
-                        <input id="ventana-hojas" name="hojas" type="number" min="1" placeholder="Hojas"
-                            required>
+                        <label for="ventana-hojas">Hojas</label>
+                        <input id="ventana-hojas" name="hojas" type="number" min="1" placeholder="Hojas" required>
 
                         <button id="btnAgregarVentana" type="button">Agregar Ventana</button>
                     </div>
                 </section>
                 <section class="section-tables">
+
+                    <!-- control para eliminar por ID (esquina superior derecha) -->
+                    <div class="table-controls" aria-hidden="false">
+                        <input id="delete-id-input" type="text" placeholder="ID a eliminar" aria-label="ID a eliminar">
+                        <button id="btnEliminarPorId" type="button" title="Eliminar fila por ID">Eliminar</button>
+                    </div>
+
                     <!-- Tablas para almacenar la estructura de datos -->
                     <div class="tables" aria-live="polite">
 
@@ -135,30 +141,7 @@
                                     </tr>
                                 <tbody id="contenido-tabla">
                                     <!-- filas añadidas dinámicamente -->
-                                     <tr>
-                                        <!-- Medidas Hueco -->
-                                        <td>1</td>
-                                        <td>2</td>
-                                        <td>3</td>
-                                        <td>4</td>
-                                        <td>5</td>
-                                        <!-- Perfiles Marco -->
-                                        <td>6</td>
-                                        <td>7</td>
-                                        <td>8</td>
-                                        <td>9</td>
-                                         <!-- Perfiles Hoja -->
-                                        <td>10</td>
-                                        <td>11</td>
-                                        <td>12</td>
-                                        <td>13</td>
-                                        <!-- Vidrio -->
-                                        <td>14</td>
-                                        <td>15</td>
-                                        <td>16</td>
-                                        <!-- Goma -->
-                                        <td>17</td>
-                                    </tr>
+                                    
                                 </tbody>
                             </table>
                         </section>
