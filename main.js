@@ -18,9 +18,6 @@ const renderHome = () => {
 
     const btnAgregarVentana = document.getElementById('btnAgregarVentana'); // Botón "Agregar Ventana"
     btnAgregarVentana.addEventListener('click', AgregarVentana);
-
-    const btnEliminarPorId = document.getElementById("btnEliminarPorId");
-    btnEliminarPorId.addEventListener("click", EliminarVentana);
 }
 const renderLogin = () => {
     const loginTemplate = document.getElementById('login-template');
@@ -171,10 +168,6 @@ const RenderVentana = (ventana) => {
             </tr>
         `;
     tbody.insertAdjacentHTML('beforeend', row);
-
-    let tabla = document.getElementById("hueco-table")
-
-    console.log(tabla);
 }
 
 window.onload = () => {
