@@ -93,9 +93,9 @@ const AgregarVentana = () => {
 
     RenderVentana(ventanas[ventanas.length - 1]);  //renderizamos todas las ventanas //luego implementar renderizar solo la ultima
 }
-const EliminarVentana = () => {
-    const raw = document.getElementById('delete-id-input')?.value;
-    const id = parseInt(String(raw ?? '').trim(), 10);
+function EliminarVentana(_id) {
+    
+    const id = parseInt(String(_id ?? '').trim(), 10);
 
     if (isNaN(id) || id < 1) {
         alert('ID inválido');
@@ -108,7 +108,7 @@ const EliminarVentana = () => {
         return;
     }
 
-     // eliminar del arreglo
+    // eliminar del arreglo
     ventanas.splice(idx, 1);
 
     // reindexar ids consecutivos empezando en 1
@@ -125,9 +125,7 @@ const EliminarVentana = () => {
     const input = document.getElementById('delete-id-input');
     if (input) input.value = '';
 
-    console.log('Ventana eliminada. Estado actual:', ventanas);
-
-
+    console.log('Ventana eliminada:', ventanas);
 }
 const InfoMe = () => {
     return fetch(urlme, {
@@ -147,8 +145,9 @@ const RenderVentana = (ventana) => {
     tbody = document.getElementById("contenido-tabla"); //buscamos contenido actual de la tabla
 
     const row = `
-            <tr>
-                <td>${ventana.id}</td>
+    <tr id = ${ventana.id}>
+                <td class = "edit" onclick = "EliminarVentana(${ventana.id})" > x </td>
+                <td >${ventana.id}</td>
                 <td>${ventana.cantidad ?? ''}</td>
                 <td>${ventana.ancho ?? ''}</td>
                 <td>${ventana.alto ?? ''}</td>
@@ -172,6 +171,10 @@ const RenderVentana = (ventana) => {
             </tr>
         `;
     tbody.insertAdjacentHTML('beforeend', row);
+
+    let tabla = document.getElementById("hueco-table")
+
+    console.log(tabla);
 }
 
 window.onload = () => {
