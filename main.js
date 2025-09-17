@@ -88,7 +88,7 @@ const AgregarVentana = () => {
 
     //console.log(ventanas)
 
-    RenderVentana(ventanas[ventanas.length - 1]);  //renderizamos todas las ventanas //luego implementar renderizar solo la ultima
+    RenderVentana(ventanas[ventanas.length - 1]);  //renderizamos solo la ultima
 }
 function EliminarVentana(_id) {
     
@@ -117,12 +117,66 @@ function EliminarVentana(_id) {
         tbody.innerHTML = '';
         ventanas.forEach(v => RenderVentana(v));
     }
+}
 
-    // limpiar input
-    const input = document.getElementById('delete-id-input');
-    if (input) input.value = '';
+function EditarVentana(_id){
 
-    console.log('Ventana eliminada:', ventanas);
+    const id = parseInt(String(_id ?? '').trim(), 10);
+
+    if (isNaN(id) || id < 1) {
+        alert('ID inválido');
+        return;
+    }
+
+    const idx = ventanas.findIndex(v => Number(v.id) === id);
+    if (idx === -1) {
+        alert(`No se encontró ventana con ID ${id}`);
+        return;
+    }
+
+    var medidas = [                           //falta comprobar que no faltan datos
+        document.getElementById("ventana-cantidad").value,
+        document.getElementById("ventana-ancho").value,
+        document.getElementById("ventana-alto").value,
+        document.getElementById("ventana-hojas").value,
+    ]
+
+    ventanas[idx] = {
+        // Medidas
+        id:_id,
+        cantidad: medidas[0],
+        ancho: medidas[1],
+        alto: medidas[2],
+        hojas: medidas[3],
+        //Perfiles Marco
+        Cant: -1,
+        Medida: -1,
+        Cant: -1,
+        Medida: -1,
+        // Perfiles Hoja
+        Cant: -1,
+        Medida: -1,
+        Cant: -1,
+        Medida: -1,
+        // Vidrio
+        Cant: -1,
+        Ancho: -1,
+        Alto: -1,
+        // Goma
+        Pie: -1,
+
+    };
+
+    //reseteando valores de los inputs
+    document.getElementById("ventana-ancho").value = "";
+    document.getElementById("ventana-alto").value = "";
+
+    // re-renderizar tbody
+    const tbody = document.getElementById('contenido-tabla');
+    if (tbody) {
+        tbody.innerHTML = '';
+        ventanas.forEach(v => RenderVentana(v));
+    }
 }
 const InfoMe = () => {
     return fetch(urlme, {
@@ -143,7 +197,8 @@ const RenderVentana = (ventana) => {
 
     const row = `
     <tr id = ${ventana.id}>
-                <td class = "edit" onclick = "EliminarVentana(${ventana.id})" > x </td>
+                <td class = "edit" onclick = "EliminarVentana(${ventana.id})" > <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v18H3zM15 9l-6 6m0-6l6 6"/></svg> </td>
+                <td class = "edit" onclick = "EditarVentana(${ventana.id})" > <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="14 2 18 6 7 17 3 17 3 13 14 2"></polygon><line x1="3" y1="22" x2="21" y2="22"></line></svg> </td>
                 <td >${ventana.id}</td>
                 <td>${ventana.cantidad ?? ''}</td>
                 <td>${ventana.ancho ?? ''}</td>

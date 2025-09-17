@@ -39,7 +39,7 @@
   table-layout: fixed;
   border-collapse: collapse;
   min-width: 0;           /* permite encoger dentro del scroller */
-  max-width: 1100px;
+  max-width: 1200px;
   white-space: normal;    /* permite que el contenido haga wrap */
   word-break: break-word; /* evitar que una celda larga obligue el ancho */
 }
