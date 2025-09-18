@@ -1,0 +1,81 @@
+/* Sección: Selector de Proyectos (estilo coherente con section-inputs) */
+.section-proyectos {
+  max-width: 980px;
+  margin: 0 auto 1rem;
+  padding: 14px;
+  background: rgba(255,255,255,0.76);
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(16,24,40,0.04);
+  border: 1px solid rgba(15,23,42,0.04);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+/* Título pequeño dentro de la sección (si lo usas) */
+.section-proyectos > h2 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #0f172a;
+  flex: 0 0 auto;
+}
+/* Select: ocupa el espacio disponible */
+.proyecto-controls select {
+  flex: 1 1 auto;
+  min-width: 160px;
+  padding: 9px 10px;
+  border-radius: 8px;
+  border: 1px solid #e6e9ee;
+  background: #fff;
+  font-size: 0.95rem;
+  outline: none;
+  transition: box-shadow .15s ease, border-color .15s ease;
+}
+/* Focus visual del select */
+.proyecto-controls select:focus {
+  border-color: rgba(37,99,235,0.35);
+  box-shadow: 0 6px 16px rgba(37,99,235,0.06);
+}
+
+/* Botón cargar */
+#btnCargarProyecto {
+  flex: 0 0 auto;
+  padding: 9px 12px;
+  border-radius: 8px;
+  background: var(--accent, #2563eb);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+#btnCargarProyecto:hover { transform: translateY(-2px); }
+#btnCargarProyecto:active { transform: translateY(0); }
+
+/* input para nuevo proyecto (coincide con estilo del select) */
+.nuevo-proyecto-input {
+  padding: 9px 10px;
+  border-radius: 8px;
+  border: 1px solid #e6e9ee;
+  background: #fff;
+  font-size: 0.95rem;
+  outline: none;
+  transition: box-shadow .15s ease, border-color .15s ease;
+  min-width: 160px;
+}
+
+/* Responsive: apilar en pantallas pequeñas */
+@media (max-width: 720px) {
+  .section-proyectos { flex-direction: column; align-items: stretch; padding: 12px; }
+  .proyecto-controls { margin-top: 8px; width: 100%; }
+  #btnCargarProyecto { width: 120px; }
+  .proyecto-controls select,
+  .nuevo-proyecto-input { width: 100%; box-sizing: border-box; }
+}
+
+@media (max-width: 420px) {
+  .section-proyectos { padding: 10px; gap: 8px; }
+  #btnCargarProyecto { width: 100%; }
+}

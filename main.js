@@ -18,6 +18,47 @@ const renderHome = () => {
 
     const btnAgregarVentana = document.getElementById('btnAgregarVentana'); // Botón "Agregar Ventana"
     btnAgregarVentana.addEventListener('click', AgregarVentana);
+
+     // nuevo: control para mostrar/ocultar input de nombre de proyecto
+    const proyectosSelect = document.getElementById('proyectos-select');
+    const nuevoProyectoInput = document.getElementById('nuevo-proyecto-input');
+    if (proyectosSelect && nuevoProyectoInput) {
+        proyectosSelect.addEventListener('change', (e) => {
+            if (e.target.value === 'new') {
+                nuevoProyectoInput.style.display = 'inline-block';
+                nuevoProyectoInput.focus();
+            } else {
+                nuevoProyectoInput.style.display = 'none';
+                nuevoProyectoInput.value = '';
+            }
+        });
+    }
+
+    // opcional: manejar botón cargar (si quieres crear proyecto cuando "new" y hay nombre)
+    const btnCargarProyecto = document.getElementById('btnCargarProyecto');
+    if (btnCargarProyecto && proyectosSelect && nuevoProyectoInput) { //comprobamos si existen
+
+        btnCargarProyecto.addEventListener('click', () => {
+            if (proyectosSelect.value === 'new') {
+                const nombre = nuevoProyectoInput.value.trim(); //limpiamos espacios
+                if (!nombre) return alert('Ingrese el nombre del nuevo proyecto'); //salimos si no tiene nombre
+ 
+                const opt = document.createElement('option'); // creamos el nuevo elemento en la opciones
+                opt.text = nombre;
+
+                proyectosSelect.appendChild(opt);
+                proyectosSelect.value = opt.value;
+
+                nuevoProyectoInput.style.display = 'none'; //reseteamos casilla
+                nuevoProyectoInput.value = '';
+                // TODO: persistir en backend
+
+            } else {
+                // cargar proyecto seleccionado segun backend
+                
+            }
+        });
+    }
 }
 const renderLogin = () => {
     const loginTemplate = document.getElementById('login-template');

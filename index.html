@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/section-inputs.css">
     <link rel="stylesheet" href="css/section-tables.css">
+    <link rel="stylesheet" href="css/section-proyectos.css">
 
 </head>
 
@@ -63,6 +64,23 @@
                 <div class="section-header">
                     <h1 class="page-title">Cálculo de materiales</h1>
                 </div>
+                <section class="section-proyectos">
+                    <h2>Proyectos</h2>
+                    <div class="proyecto-controls" aria-label="Selector de proyectos">
+                        <label for="proyectos-select" class="sr">Seleccionar proyecto</label>
+                        <select id="proyectos-select" aria-label="Seleccionar proyecto">
+                            <option value="">-- Seleccione un proyecto --</option>
+                            <option value="new">Nuevo Proyecto</option>
+                            <!-- opciones se poblarán dinámicamente -->
+                        </select>
+                        
+                        <!-- input para nombre de nuevo proyecto (oculto por defecto) -->
+                        <input id="nuevo-proyecto-input" class="nuevo-proyecto-input" type="text"
+                            placeholder="Nombre del nuevo proyecto" aria-label="Nombre nuevo proyecto"
+                            style="display:none">
+                        <button id="btnCargarProyecto" type="button">Cargar</button>
+                    </div>
+                </section>
                 <section class="section-inputs">
                     <h2>Lista de Ventanas</h2>
 
@@ -136,7 +154,7 @@
                                     </tr>
                                 <tbody id="contenido-tabla">
                                     <!-- filas añadidas dinámicamente -->
-                                    
+
                                 </tbody>
                             </table>
                         </section>

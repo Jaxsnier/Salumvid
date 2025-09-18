@@ -1,6 +1,6 @@
 /*css del main del html que se encuentra en el tamplate "home-template"*/
 
-/* Sección: Lista de Ventanas (estilo minimalista) */
+/* Sección: Lista de Ventanas (estilo minimalista) -----------------------------------*/
 .section-inputs {
   max-width: 980px;
   margin: 0 auto 1.5rem;
@@ -76,12 +76,14 @@
   .ventana-form { grid-template-columns: repeat(2, minmax(140px, 1fr)); gap: 8px; }
   .ventana-form label, .ventana-form input { grid-column: auto; }
   .ventana-form button#btnAgregarVentana { grid-column: 1 / -1; width: 100%; }
+  
 }
 
 /* En móviles muy pequeños, una columna */
 @media (max-width: 420px) {
   .ventana-form { grid-template-columns: 1fr; }
   .ventana-form label { margin-top: 6px; }
+  .page-content { padding-top: 300px;}
 }
 
 /* Pequeño ajuste visual para mantener consistencia con tablas */
