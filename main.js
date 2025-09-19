@@ -55,7 +55,7 @@ const renderHome = () => {
 
             } else {
                 // cargar proyecto seleccionado segun backend
-                
+
             }
         });
     }
@@ -140,6 +140,12 @@ function EliminarVentana(_id) {
         return;
     }
 
+    // Confirmación antes de eliminar
+    const confirmar = confirm(`¿Está seguro que desea eliminar la ventana ${id}?`);
+    if (!confirmar) {
+        return;
+    }
+
     const idx = ventanas.findIndex(v => Number(v.id) === id);
     if (idx === -1) {
         alert(`No se encontró ventana con ID ${id}`);
@@ -181,6 +187,12 @@ function EditarVentana(_id){
         document.getElementById("ventana-alto").value,
         document.getElementById("ventana-hojas").value,
     ]
+
+        // Confirmación antes de modificar
+    const confirmar = confirm(`¿Está seguro que desea modificar la ventana ${id}, con los valore: \n Ancho: ${medidas[1]} \n Alto: ${medidas[2]} \n Cantidad: ${medidas[0]} \n Hojas: ${medidas[3]}`);
+    if (!confirmar) {
+        return;
+    }
 
     ventanas[idx] = {
         // Medidas
